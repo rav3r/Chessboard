@@ -16,6 +16,7 @@ public:
 	int getY();
 	void setXY(int xx, int yy);
 	int getType();
+	void print();
 
 private:
 	bool isKingMovePossible(int xx, int yy);

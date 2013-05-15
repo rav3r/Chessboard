@@ -47,3 +47,8 @@ int Figure :: getX() {return x;}
 int Figure :: getY() {return y;}
 void Figure :: setXY(int xx, int yy) {x=xx; y=yy;}
 int Figure :: getType() {return type;}
+
+void Figure::print()
+{
+	cout << "Typ:" << type << "   x:" << x << "  y:" << y;
+};
