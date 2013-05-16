@@ -1,7 +1,7 @@
-using namespace std;
-
 #include "Board.h"
 #include <iostream>
+
+using namespace std;
 
 Board::Board()
 {

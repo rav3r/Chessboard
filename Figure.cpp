@@ -1,7 +1,7 @@
-using namespace std;
-
 #include "Figure.h"
 #include <iostream>
+
+using namespace std;
 
 Figure :: Figure(int _type, int _x, int _y)
 {

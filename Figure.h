@@ -1,6 +1,6 @@
 #if !defined _FIGURE_H_
 #define _FIGURE_H_
- 
+
 class Figure
 {
 private:

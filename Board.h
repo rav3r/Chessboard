@@ -2,7 +2,7 @@
 #define _BOARD_H_
 
 #include <vector>
-#include "Figure.h";
+#include "Figure.h"
 
 class Board
 {

@@ -1,0 +1,5 @@
+*.db
+*.user
+*.ncb
+Debug
+Release
