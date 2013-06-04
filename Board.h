@@ -2,7 +2,8 @@
 #define _BOARD_H_
 
 #include <vector>
-#include "Figure.h"
+
+class Figure;
 
 class Board
 {
@@ -13,16 +14,20 @@ private:
 	bool mat;
 
 public:
-	Board();
-	Figure* getFigure(int xx, int yy);
+	Board();  //done
+	Figure* getFigure(int xx, int yy);  //done
 	void moveTo (int xx, int yy, Figure* fig);
 	bool isSzach();
 	bool isMat();
-	std::vector<Figure*>* getWhite();
-	std::vector<Figure*>* getBlack();
-
+	std::vector<Figure*>* getWhite();  //done
+	std::vector<Figure*>* getBlack();  //done
 
 private:
+	void createFigures();  //done
+	bool isFigureOnField(int xx, int yy);  //done
+	bool isBlackOnField(int xx, int yy);  //done
+	bool isWhiteOnField(int xx, int yy);  //done
+	bool fieldExists(int xx, int yy);  //done
 	bool checkSzach();
 	bool checkMat();
 	Figure* findKing();
@@ -30,8 +35,6 @@ private:
 	std::vector<Figure*> getSzachFigures();
 	bool canFighPreventFromMat();
 	bool canKingBeHidden();
-	void createFigures();
-
 };
 
 #endif

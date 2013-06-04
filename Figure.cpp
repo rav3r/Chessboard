@@ -1,13 +1,16 @@
 #include "Figure.h"
+#include "Board.h"
 #include <iostream>
 
 using namespace std;
 
-Figure :: Figure(int _type, int _x, int _y)
+Figure :: Figure(int _type, int _x, int _y, int c, Board* b)
 {
 	type = _type;
 	x = _x;
 	y = _y;
+	color = c;
+	board = b;
 }
 
 
@@ -36,7 +39,28 @@ bool Figure :: moveFigure(int xx, int yy)
 	return moveOk;
 }
 
-bool Figure :: isKingMovePossible(int xx, int yy){ return true;}
+int Figure :: getColor() {return color;}
+
+bool Figure :: isColorOfTheFigureTheSame(int xx, int yy)
+{ //false - zgodne
+	Figure* fig = board->getFigure(xx,yy);
+	if(fig!=NULL)
+		if(fig->getColor()==color)
+			return true;
+	return false;
+}
+
+bool Figure :: isKingMovePossible(int xx, int yy)
+{
+	std::cout << "Test koloru krola\n";
+	if(isColorOfTheFigureTheSame(xx,yy))
+			return false;
+	std::cout << "Test koncowego polozenia krola\n";
+	if(abs(x-xx)>1 || abs(y-yy)>1)
+		return false;
+	std::cout << "Ruch mozliwy\n";
+	return true;
+}
 bool Figure :: isQueenMovePossible(int xx, int yy){ return false;}
 bool Figure :: isRookMovePossible(int xx, int yy){return false;}
 bool Figure :: isKnightMovePossible(int xx, int yy){ return false;}
@@ -48,7 +72,8 @@ int Figure :: getY() {return y;}
 void Figure :: setXY(int xx, int yy) {x=xx; y=yy;}
 int Figure :: getType() {return type;}
 
+
 void Figure::print()
 {
-	cout << "Typ:" << type << "   x:" << x << "  y:" << y;
+	cout << "Typ:" << type << "   x:" << x << "  y:" << y << "   kolor:" << color << "\n";
 };

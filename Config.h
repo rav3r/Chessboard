@@ -6,10 +6,10 @@
 // UWAGA: mo¿e byæ odkomentowany tylko jeden z poni¿szych definów, inaczej siê nie
 // skompiluje!!!
 
-#define COMPILE_MAIN // tu bêdziemy integrowaæ wszystko
+//#define COMPILE_MAIN // tu bêdziemy integrowaæ wszystko
 // tutaj testowanie
 //#define COMPILE_TEST_RAFAL
-//#define COMPILE_TEST_ZBYSZEK
+#define COMPILE_TEST_ZBYSZEK
 //#define COMPILE_TEST_MIESZKO
 
 // TEGO PLIKU NIE COMMITUJEMY!!!
