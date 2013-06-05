@@ -11,18 +11,32 @@ std::vector<Figure*> wek;
 
 int main(int argc, char *argv[])
 {
-	std::cout << "Test Zbyszka\n";
+	std::cout << "Test Zbyszka\n\n\n";
 	
 	Board* b = new Board();
 
-	Figure* fig = b->getFigure(3,7);  //bialy krol
+	//Figure* fig = b->getFigure(3,7);  //bialy krol
 	//Figure* fig = b->getFigure(4,7);  //biala krolowa
 	//Figure* fig = b->getFigure(5,7);  //bialy prawy laufer
 	//Figure* fig = b->getFigure(6,7);  //bialy prawy kon
 	//Figure* fig = b->getFigure(7,7);  //biala prawa wieza
 	//Figure* fig = b->getFigure(7,6);  //bialy pionek max od prawej
-	fig->moveFigure(3,6);
+	//fig->moveFigure(4,3);
 
+	b->printFigures();
+	b-> moveTo(7,1,b->getFigure(7,7));
+	b->printFigures();
+
+
+
+
+	std :: cout << "\n";
+	
+	
+	
+	
+	//std::cout << "Sa figure?: " << fig -> isFigureBeetweenPoints(0,1,0,4) << "\n";	
+	//std::cout << "Opposite color: " << fig->isFigureWithOppositeColor(2,6,1) << "\n";
 
 	/*
 	lol = b->getWhite();
@@ -62,7 +76,7 @@ int main(int argc, char *argv[])
 	std::cout << "Is field free 0,6: " << b->isFigureOnField(0,6) << "\n";
 	*/
 
-
+	std::cout << "\n\n";
 	system("PAUSE");
 	return EXIT_SUCCESS;
 }

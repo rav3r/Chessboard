@@ -21,6 +21,9 @@ public:
 	bool isMat();
 	std::vector<Figure*>* getWhite();  //done
 	std::vector<Figure*>* getBlack();  //done
+	void removeFigure(int xx, int yy);  //done
+
+	void printFigures(); //done
 
 private:
 	void createFigures();  //done
