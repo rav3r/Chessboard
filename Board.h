@@ -16,14 +16,17 @@ private:
 public:
 	Board();  //done
 	Figure* getFigure(int xx, int yy);  //done
-	void moveTo (int xx, int yy, Figure* fig);
-	bool isSzach();
-	bool isMat();
+	void moveTo (int xx, int yy, Figure* fig);  //-----started-----
+	bool isSzach();  //done
+	bool isMat();  //done
 	std::vector<Figure*>* getWhite();  //done
 	std::vector<Figure*>* getBlack();  //done
 	void removeFigure(int xx, int yy);  //done
 
 	void printFigures(); //done
+
+	bool checkSzach(int color);  //done     //kolor szachujacy
+	
 
 private:
 	void createFigures();  //done
@@ -31,11 +34,16 @@ private:
 	bool isBlackOnField(int xx, int yy);  //done
 	bool isWhiteOnField(int xx, int yy);  //done
 	bool fieldExists(int xx, int yy);  //done
-	bool checkSzach();
+
+
+	//te do szacha
+	Figure* findKing(int color);  //done
+	bool checkSzachOn(int color, int xx, int yy);  //done
+
+
+	//te nizej to do mata
 	bool checkMat();
-	Figure* findKing();
-	bool checkSzachOn(int xx, int yy);
-	std::vector<Figure*> getSzachFigures();
+	std::vector<Figure*>* getSzachFigures();
 	bool canFighPreventFromMat();
 	bool canKingBeHidden();
 };

@@ -20,7 +20,7 @@ public:
 	void setXY(int xx, int yy);  //done
 	int getType();  //done
 	int getColor();  //done
-	
+	bool isMovePossible(int xx, int yy);
 	void print();  //done
 
 private:

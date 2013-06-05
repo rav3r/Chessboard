@@ -22,19 +22,24 @@ int main(int argc, char *argv[])
 	//Figure* fig = b->getFigure(7,7);  //biala prawa wieza
 	//Figure* fig = b->getFigure(7,6);  //bialy pionek max od prawej
 	//fig->moveFigure(4,3);
-
+	
+	
 	b->printFigures();
 	b-> moveTo(7,1,b->getFigure(7,7));
 	b->printFigures();
+	
+
+
+	std :: cout << "Czarne szachuja?: " << b->checkSzach(0) << "\n";
+	std :: cout << "\n\n";
+	std :: cout << "Biale szachuja?: " << b->checkSzach(1) << "\n";
+	
 
 
 
 
-	std :: cout << "\n";
-	
-	
-	
-	
+	std :: cout << "\n\n";
+
 	//std::cout << "Sa figure?: " << fig -> isFigureBeetweenPoints(0,1,0,4) << "\n";	
 	//std::cout << "Opposite color: " << fig->isFigureWithOppositeColor(2,6,1) << "\n";
 

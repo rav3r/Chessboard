@@ -84,7 +84,7 @@ bool Figure :: isFigureBeetweenPoints(int xx1, int yy1, int xx2, int yy2)
 	return false;
 }
 
-bool Figure :: moveFigure(int xx, int yy)
+bool Figure :: isMovePossible(int xx, int yy)
 {
 	bool moveOk = false;
 	switch(type)
@@ -96,6 +96,12 @@ bool Figure :: moveFigure(int xx, int yy)
 		case 4: {cout << "Kon\n";  moveOk = isKnightMovePossible(xx, yy);  break;}
 		case 5: {cout << "Pionek\n";  moveOk = isPawnMovePossible(xx, yy);  break;}
 	}
+	return moveOk;
+}
+
+bool Figure :: moveFigure(int xx, int yy)
+{
+	bool moveOk = isMovePossible(xx, yy);
 	if (moveOk)
 	{
 		cout << "Mozna ruszyc\n";
@@ -135,13 +141,10 @@ bool Figure :: isFigureWithOppositeColor(int xx, int yy, int color)
 
 bool Figure :: isKingMovePossible(int xx, int yy)
 {//krol
-	std::cout << "Test koloru krola\n";
 	if(isColorOfTheFigureTheSame(xx,yy))
 			return false;
-	std::cout << "Test koncowego polozenia krola\n";
 	if(abs(x-xx)>1 || abs(y-yy)>1)
 		return false;
-	std::cout << "Ruch mozliwy\n";
 	return true;
 }
 
@@ -169,16 +172,12 @@ bool Figure :: isRookMovePossible(int xx, int yy)
 
 bool Figure :: isKnightMovePossible(int xx, int yy)
 {//kon
-	cout << "Test koloru dla konia\n";
 	if(isColorOfTheFigureTheSame(xx,yy))
 			return false;
-	cout << "Test krotszych x dla konia\n";
 	if (abs(xx-x)==1 && abs(yy-y)==2)
 		return true;
-	cout << "Test dluzszych x dla konia\n";
 	if (abs(xx-x)==2 && abs(yy-y)==1)
 		return true;
-	cout << "Ruch niemozliwy\n";
 	return false;
 }
 
@@ -205,6 +204,7 @@ bool Figure :: isPawnMovePossible(int xx, int yy)
 					return true;
 				if ((xx==x-1 || xx==x+1) && yy==y+1 && isFigureWithOppositeColor(xx,yy,getColor()))
 					return true;
+				break;
 			}
 		case 1:
 			{
@@ -212,10 +212,11 @@ bool Figure :: isPawnMovePossible(int xx, int yy)
 					return true;
 				if ((xx==x-1 || xx==x+1) && yy==y-1 && isFigureWithOppositeColor(xx,yy,getColor()))
 					return true;
+				break;
 			}
 		default:{cout << "Error\n"; return false;}
 	}
-	return true;
+	return false;
 }
 
 
