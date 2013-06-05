@@ -25,7 +25,7 @@ public:
 
 	void printFigures(); //done
 
-	bool checkSzach(int color);  //done     //kolor szachujacy
+	
 	
 
 private:
@@ -37,9 +37,10 @@ private:
 
 
 	//te do szacha
-	Figure* findKing(int color);  //done
+	bool checkSzach(int color);  //done     //kolor szachujacy
 	bool checkSzachOn(int color, int xx, int yy);  //done
-
+	Figure* findKing(int color);  //done
+	
 
 	//te nizej to do mata
 	bool checkMat();

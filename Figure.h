@@ -15,12 +15,12 @@ private:
 public:
 	Figure(int _type, int _x, int _y, int c, Board* b); //done
 	bool moveFigure(int xx, int yy);  //done
+	bool isMovePossible(int xx, int yy);
 	int getX();  //done
 	int getY();  //done
-	void setXY(int xx, int yy);  //done
 	int getType();  //done
 	int getColor();  //done
-	bool isMovePossible(int xx, int yy);
+	
 	void print();  //done
 
 private:

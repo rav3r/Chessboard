@@ -20,66 +20,17 @@ int main(int argc, char *argv[])
 	//Figure* fig = b->getFigure(5,7);  //bialy prawy laufer
 	//Figure* fig = b->getFigure(6,7);  //bialy prawy kon
 	//Figure* fig = b->getFigure(7,7);  //biala prawa wieza
-	//Figure* fig = b->getFigure(7,6);  //bialy pionek max od prawej
-	//fig->moveFigure(4,3);
-	
+	//Figure* fig = b->getFigure(7,6);  //bialy pionek max od prawej	
 	
 	b->printFigures();
 	b-> moveTo(7,1,b->getFigure(7,7));
 	b->printFigures();
-	
-
-
-	std :: cout << "Czarne szachuja?: " << b->checkSzach(0) << "\n";
-	std :: cout << "\n\n";
-	std :: cout << "Biale szachuja?: " << b->checkSzach(1) << "\n";
-	
+	std :: cout << "Is szach?: " << b->isSzach();
 
 
 
 
-	std :: cout << "\n\n";
 
-	//std::cout << "Sa figure?: " << fig -> isFigureBeetweenPoints(0,1,0,4) << "\n";	
-	//std::cout << "Opposite color: " << fig->isFigureWithOppositeColor(2,6,1) << "\n";
-
-	/*
-	lol = b->getWhite();
-	wek = *lol;
-	wek[0] -> print();
-	*/
-
-	/*
-	std::cout << "Field 1,1 exists: " << b->fieldExists(1,1) << "\n";
-	std::cout << "Field 7,7 exists: " << b->fieldExists(7,7) << "\n";
-	std::cout << "Field -2,6 exists: " << b->fieldExists(-2,6) << "\n";
-	*/
-
-	/*
-	Figure* figura = new Figure(0, 2, 2);
-	Figure* figura2 = new Figure(0, 2, 2);
-	bool lol = figura -> moveFigure(1,1);
-	cout << figura -> getX() << "  " << lol << "\n";
-	cout << (figura == figura2) << "  lol\n";
-	*/
-
-
-	/*
-	std::cout << "Is black on field 0,0: " << b->isBlackOnField(0,0) << "\n";
-	std::cout << "Is black on field 3,0: " << b->isBlackOnField(3,0) << "\n";
-	std::cout << "Is black on field 0,3: " << b->isBlackOnField(0,3) << "\n";
-	std::cout << "Is black on field 0,6: " << b->isBlackOnField(0,6) << "\n";
-
-	std::cout << "Is white on field 0,0: " << b->isWhiteOnField(0,0) << "\n";
-	std::cout << "Is white on field 3,0: " << b->isWhiteOnField(3,0) << "\n";
-	std::cout << "Is white on field 0,3: " << b->isWhiteOnField(0,3) << "\n";
-	std::cout << "Is white on field 0,6: " << b->isWhiteOnField(0,6) << "\n";
-
-	std::cout << "Is field free 0,0: " << b->isFigureOnField(0,0) << "\n";
-	std::cout << "Is field free 3,0: " << b->isFigureOnField(3,0) << "\n";
-	std::cout << "Is field free 0,3: " << b->isFigureOnField(0,3) << "\n";
-	std::cout << "Is field free 0,6: " << b->isFigureOnField(0,6) << "\n";
-	*/
 
 	std::cout << "\n\n";
 	system("PAUSE");

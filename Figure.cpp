@@ -13,75 +13,17 @@ Figure :: Figure(int _type, int _x, int _y, int c, Board* b)
 	board = b;
 }
 
-int Figure :: getColor() {return color;}
-int Figure :: getX() {return x;}
-int Figure :: getY() {return y;}
-void Figure :: setXY(int xx, int yy) {x=xx; y=yy;}
-int Figure :: getType() {return type;}
-
-bool Figure :: isFigureBeetweenPoints(int xx1, int yy1, int xx2, int yy2)
+bool Figure :: moveFigure(int xx, int yy)
 {
-	int* tab;
-	std::vector <int*> figures;
-	
-	if (xx1==xx2 && yy1!=yy2)  //pionowo  yy rozne
+	bool moveOk = isMovePossible(xx, yy);
+	if (moveOk)
 	{
-		int miny = yy1<yy2 ? yy1 : yy2;
-		int maxy = yy1<yy2 ? yy2 : yy1;
-		for (int i=miny;i<maxy;i++)
-		{
-			tab = new int[2];
-			tab[0] = xx1;
-			tab[1] = i;
-			figures.push_back(tab);
-		}
+		if(board->getFigure(xx,yy)!=NULL)
+			board->removeFigure(xx,yy);
+		x = xx;
+		y = yy;
 	}
-
-	if (xx1!=xx2 && yy1==yy2)  //poziomo  xx rozne
-	{
-		int minx = xx1<xx2 ? xx1 : xx2;
-		int maxx = xx1<xx2 ? xx2 : xx1;
-		for (int i=minx;i<maxx;i++)
-		{
-			tab = new int[2];
-			tab[0] = i;
-			tab[1] = yy1;
-			figures.push_back(tab);
-		}
-	}
-
-	if(xx1!=xx2 && yy1!=yy2)  //skosnie
-	{
-		int minx = xx1<xx2 ? xx1 : xx2;
-		int maxx = xx1<xx2 ? xx2 : xx1;
-		int miny = yy1<yy2 ? yy1 : yy2;
-		int maxy = yy1<yy2 ? yy2 : yy1;
-		for (int i=0;i<maxx-minx;i++)
-		{
-			tab = new int[2];
-			tab[0] = minx+i;
-			tab[1] = miny+i;
-			figures.push_back(tab);
-		}
-	}
-
-	if(figures.size()>0)
-		figures.erase(figures.begin());
-
-	/*
-	for (int i=0;i<figures.size();i++)
-	{
-		cout << figures[i][0] << " " << figures[i][1] <<"\n";
-	}
-	*/
-
-	for (int i=0;i<figures.size();i++)
-	{
-		if(board->getFigure(figures[i][0], figures[i][1])!=NULL)
-			return true;
-	}
-
-	return false;
+	return moveOk;
 }
 
 bool Figure :: isMovePossible(int xx, int yy)
@@ -89,55 +31,30 @@ bool Figure :: isMovePossible(int xx, int yy)
 	bool moveOk = false;
 	switch(type)
 	{
-		case 0: {cout << "Krol\n";  moveOk = isKingMovePossible(xx, yy);  break;}
-		case 1: {cout << "Krolowa\n";  moveOk = isQueenMovePossible(xx, yy);  break;}
-		case 2: {cout << "Wieza\n";  moveOk = isRookMovePossible(xx, yy);  break;}
-		case 3: {cout << "Laufer\n";  moveOk = isBishopMovePossible(xx, yy);  break;}
-		case 4: {cout << "Kon\n";  moveOk = isKnightMovePossible(xx, yy);  break;}
-		case 5: {cout << "Pionek\n";  moveOk = isPawnMovePossible(xx, yy);  break;}
+		case 0: {moveOk = isKingMovePossible(xx, yy);  break;}
+		case 1: {moveOk = isQueenMovePossible(xx, yy);  break;}
+		case 2: {moveOk = isRookMovePossible(xx, yy);  break;}
+		case 3: {moveOk = isBishopMovePossible(xx, yy);  break;}
+		case 4: {moveOk = isKnightMovePossible(xx, yy);  break;}
+		case 5: {moveOk = isPawnMovePossible(xx, yy);  break;}
 	}
 	return moveOk;
 }
 
-bool Figure :: moveFigure(int xx, int yy)
+int Figure :: getX(){return x;}
+int Figure :: getY(){return y;}
+int Figure :: getType(){return type;}
+int Figure :: getColor(){return color;}
+
+void Figure::print()
 {
-	bool moveOk = isMovePossible(xx, yy);
-	if (moveOk)
-	{
-		cout << "Mozna ruszyc\n";
-		if(board->getFigure(xx,yy)!=NULL)
-		{
-			cout << "FIGHT!!!!\n";
-			board->removeFigure(xx,yy);
-		}
-		x = xx;
-		y = yy;
-	}
-	else
-	{
-		cout << "Nie mozna ruszyc\n";
-	}
-	return moveOk;
-}
+	cout << "Typ:" << type << "   x:" << x << "  y:" << y << "   kolor:" << color << "\n";
+};
 
 
-bool Figure :: isColorOfTheFigureTheSame(int xx, int yy)
-{
-	Figure* fig = board->getFigure(xx,yy);
-	if(fig!=NULL)
-		if(fig->getColor()==color)
-			return true;
-	return false;
-}
 
-bool Figure :: isFigureWithOppositeColor(int xx, int yy, int color)
-{
-	Figure* fig = board->getFigure(xx,yy);
-	if(fig!=NULL)
-		if(abs(fig->getColor()-color)==1)
-			return true;
-	return false;
-}
+
+
 
 bool Figure :: isKingMovePossible(int xx, int yy)
 {//krol
@@ -193,7 +110,7 @@ bool Figure :: isBishopMovePossible(int xx, int yy)
 }
 
 bool Figure :: isPawnMovePossible(int xx, int yy)
-{//pawno
+{//pionek
 	if(isColorOfTheFigureTheSame(xx,yy))
 			return false;
 	switch(color)
@@ -220,7 +137,78 @@ bool Figure :: isPawnMovePossible(int xx, int yy)
 }
 
 
-void Figure::print()
+
+bool Figure :: isColorOfTheFigureTheSame(int xx, int yy)
 {
-	cout << "Typ:" << type << "   x:" << x << "  y:" << y << "   kolor:" << color << "\n";
-};
+	Figure* fig = board->getFigure(xx,yy);
+	if(fig!=NULL)
+		if(fig->getColor()==color)
+			return true;
+	return false;
+}
+
+bool Figure :: isFigureWithOppositeColor(int xx, int yy, int color)
+{
+	Figure* fig = board->getFigure(xx,yy);
+	if(fig!=NULL)
+		if(abs(fig->getColor()-color)==1)
+			return true;
+	return false;
+}
+
+bool Figure :: isFigureBeetweenPoints(int xx1, int yy1, int xx2, int yy2)
+{
+	int* tab;
+	std::vector <int*> figures;
+	
+	if (xx1==xx2 && yy1!=yy2)  //pionowo  yy rozne
+	{
+		int miny = yy1<yy2 ? yy1 : yy2;
+		int maxy = yy1<yy2 ? yy2 : yy1;
+		for (int i=miny;i<maxy;i++)
+		{
+			tab = new int[2];
+			tab[0] = xx1;
+			tab[1] = i;
+			figures.push_back(tab);
+		}
+	}
+
+	if (xx1!=xx2 && yy1==yy2)  //poziomo  xx rozne
+	{
+		int minx = xx1<xx2 ? xx1 : xx2;
+		int maxx = xx1<xx2 ? xx2 : xx1;
+		for (int i=minx;i<maxx;i++)
+		{
+			tab = new int[2];
+			tab[0] = i;
+			tab[1] = yy1;
+			figures.push_back(tab);
+		}
+	}
+
+	if(xx1!=xx2 && yy1!=yy2)  //skosnie
+	{
+		int minx = xx1<xx2 ? xx1 : xx2;
+		int maxx = xx1<xx2 ? xx2 : xx1;
+		int miny = yy1<yy2 ? yy1 : yy2;
+		int maxy = yy1<yy2 ? yy2 : yy1;
+		for (int i=0;i<maxx-minx;i++)
+		{
+			tab = new int[2];
+			tab[0] = minx+i;
+			tab[1] = miny+i;
+			figures.push_back(tab);
+		}
+	}
+
+	if(figures.size()>0)
+		figures.erase(figures.begin());
+
+	for (int i=0;i<figures.size();i++)
+	{
+		if(board->getFigure(figures[i][0], figures[i][1])!=NULL)
+			return true;
+	}
+	return false;
+}
