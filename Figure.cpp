@@ -1,6 +1,7 @@
 #include "Figure.h"
 #include "Board.h"
 #include <iostream>
+#include <cmath>
 
 using namespace std;
 

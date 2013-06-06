@@ -6,6 +6,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "Board.h"
+#include "Figure.h"
 
 int main()
 {
@@ -38,10 +39,10 @@ int main()
 	std::vector<Figure* >& black = *board.getBlack();
 	std::vector<Figure* >& white = *board.getWhite();
 
-	// G³ówna pêtla programu
+	// Gï¿½ï¿½wna pï¿½tla programu
 	while(renderWindow.isOpen())
 	{
-		// Przejmowanie eventów
+		// Przejmowanie eventï¿½w
 		sf::Event event;
 		while (renderWindow.pollEvent(event))
 		{

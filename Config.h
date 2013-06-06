@@ -1,15 +1,15 @@
 #pragma once
 
-// Ka¿dy ma w³asny plik cpp z funkcj¹ main, ¿eby w³¹czyæ do kompilacji dany plik
-// nale¿y odkomentowaæ odpowiedni define
+// Kaï¿½dy ma wï¿½asny plik cpp z funkcjï¿½ main, ï¿½eby wï¿½ï¿½czyï¿½ do kompilacji dany plik
+// naleï¿½y odkomentowaï¿½ odpowiedni define
 
-// UWAGA: mo¿e byæ odkomentowany tylko jeden z poni¿szych definów, inaczej siê nie
+// UWAGA: moï¿½e byï¿½ odkomentowany tylko jeden z poniï¿½szych definï¿½w, inaczej siï¿½ nie
 // skompiluje!!!
 
-//#define COMPILE_MAIN // tu bêdziemy integrowaæ wszystko
+//#define COMPILE_MAIN // tu bï¿½dziemy integrowaï¿½ wszystko
 // tutaj testowanie
-//#define COMPILE_TEST_RAFAL
-#define COMPILE_TEST_ZBYSZEK
+#define COMPILE_TEST_RAFAL
+//#define COMPILE_TEST_ZBYSZEK
 //#define COMPILE_TEST_MIESZKO
 
 // TEGO PLIKU NIE COMMITUJEMY!!!

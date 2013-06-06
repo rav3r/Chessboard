@@ -3,3 +3,5 @@
 *.ncb
 Debug
 Release
+/build/
+/dist/

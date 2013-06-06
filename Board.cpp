@@ -2,6 +2,7 @@
 #include "Figure.h"
 
 #include <iostream>
+#include <cmath>
 
 using namespace std;
 
@@ -134,7 +135,7 @@ bool Board::fieldExists(int xx, int yy)
 
 bool Board::checkSzach(int color)
 {
-	int kolorSzachowanegoKrola = abs(color-1);
+	int kolorSzachowanegoKrola = std::abs(color-1);
 	Figure* szachowanyKrol = findKing(kolorSzachowanegoKrola);
 	bool czySzach = checkSzachOn(color, szachowanyKrol->getX(), szachowanyKrol->getY());
 	return czySzach;
