@@ -30,6 +30,8 @@ void Board::moveTo (int xx, int yy, Figure* fig)
 		if(fig!=NULL)
 			fig -> moveFigure(xx,yy);
 	szach = checkSzach(fig->getColor());
+	if (szach==true)
+		mat = checkMat(fig->getColor());
 }
 
 bool Board::isSzach(){return szach;}
@@ -169,10 +171,29 @@ Figure* Board::findKing(int color)
 
 
 
-bool Board::checkMat()
+bool Board::checkMat(int color)
 {
+	int kolorSzachowanegoKrola = std::abs(color-1);
+	Figure* szachowanyKrol = findKing(kolorSzachowanegoKrola);
+	cout << "Wspolrzedne szachowanego krola " << szachowanyKrol->getX() << ":" << szachowanyKrol->getY() << "\n";
 
-	return false;
+	for (int i=szachowanyKrol->getY()-1;i<szachowanyKrol->getY()+2;i++)
+		for (int j=szachowanyKrol->getX()-1;j<szachowanyKrol->getX()+2;j++)
+		{
+			if(i==szachowanyKrol->getY() && j==szachowanyKrol->getX())
+				continue;
+			if(fieldExists(j,i))
+				if(!checkSzachOn(color,j,i))
+				{
+					cout << "Nie ma szacha na polu " << j << ":" << i << "\n";
+					if(szachowanyKrol->isMovePossible(j,i))
+					{
+						cout << "Ruch na pole " << j << ":" << i << " jest mozliwy\n";
+						return false;
+					}
+				}
+		}
+	return true;
 }
 
 std::vector<Figure*>* Board::getSzachFigures()

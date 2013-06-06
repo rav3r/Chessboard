@@ -43,7 +43,7 @@ private:
 	
 
 	//te nizej to do mata
-	bool checkMat();
+	bool checkMat(int color);
 	std::vector<Figure*>* getSzachFigures();
 	bool canFighPreventFromMat();
 	bool canKingBeHidden();
