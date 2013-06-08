@@ -25,7 +25,8 @@ int main(int argc, char *argv[])
 	b->printFigures();
 	b-> moveTo(7,1,b->getFigure(7,7));
 	b->printFigures();
-	std :: cout << "Is szach?: " << b->isSzach();
+	std :: cout << "Is szach?: " << b->isSzach() << "\n";
+	std :: cout << "Is mat?: " << b->isMat() << "\n";
 
 
 
