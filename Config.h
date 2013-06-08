@@ -6,9 +6,9 @@
 // UWAGA: mo�e by� odkomentowany tylko jeden z poni�szych defin�w, inaczej si� nie
 // skompiluje!!!
 
-//#define COMPILE_MAIN // tu b�dziemy integrowa� wszystko
+#define COMPILE_MAIN // tu b�dziemy integrowa� wszystko
 // tutaj testowanie
-#define COMPILE_TEST_RAFAL
+//#define COMPILE_TEST_RAFAL
 //#define COMPILE_TEST_ZBYSZEK
 //#define COMPILE_TEST_MIESZKO
 

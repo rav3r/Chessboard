@@ -36,10 +36,13 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/Board.o \
+	${OBJECTDIR}/BoardDetection.o \
 	${OBJECTDIR}/Figure.o \
+	${OBJECTDIR}/FingerDetection.o \
 	${OBJECTDIR}/Main.o \
 	${OBJECTDIR}/TestMieszko.o \
-	${OBJECTDIR}/TestRafal.o
+	${OBJECTDIR}/TestRafal.o \
+	${OBJECTDIR}/TestZbyszek.o
 
 
 # C Compiler Flags
@@ -77,10 +80,20 @@ ${OBJECTDIR}/Board.o: Board.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Board.o Board.cpp
 
+${OBJECTDIR}/BoardDetection.o: BoardDetection.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/BoardDetection.o BoardDetection.cpp
+
 ${OBJECTDIR}/Figure.o: Figure.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Figure.o Figure.cpp
+
+${OBJECTDIR}/FingerDetection.o: FingerDetection.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/FingerDetection.o FingerDetection.cpp
 
 ${OBJECTDIR}/Main.o: Main.cpp 
 	${MKDIR} -p ${OBJECTDIR}
@@ -96,6 +109,11 @@ ${OBJECTDIR}/TestRafal.o: TestRafal.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/TestRafal.o TestRafal.cpp
+
+${OBJECTDIR}/TestZbyszek.o: TestZbyszek.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/TestZbyszek.o TestZbyszek.cpp
 
 # Subprojects
 .build-subprojects:

@@ -1,14 +1,8 @@
-#include "Config.h"
-#ifdef COMPILE_TEST_RAFAL
-#include "opencv/cv.h" 
- #include "opencv/highgui.h" 
- #include <iostream>
-#define SFML_STATIC
-#include <SFML/Graphics.hpp>
+#include <SFML/System/Vector2.hpp>
+
+#include "BoardDetection.h"
 
 #include "Matrix.h"
-
-#include "FingerDetection.h"
  
 class Accumulator
 {
@@ -79,71 +73,40 @@ public:
     }
 };
 
+////////////////////////////////////////////////////////////////////////////////
 
+IplImage* currFrame = 0;
+IplImage* prevFrame = 0;
+IplImage* substract = 0;
+IplImage* mask      = 0;
+    
+int currMarker = 0;
+    
+sf::Vector2f points[4];
 
-int main()
+sf::CircleShape circles[4];
+
+Accumulator acc;
+Matrix A(4,4);
+
+////////////////////////////////////////////////////////////////////////////////
+
+void BoardDetection::Init()
 {
-   Matrix A(4,4);
-     
-   Accumulator acc;
-   acc.Clear();
-   CvCapture* capture = cvCaptureFromCAM( CV_CAP_ANY );
-   if ( !capture )
-   {
-     fprintf( stderr, "ERROR: capture is NULL \n" );
-     getchar();
-     return -1;
-   }
-   cvNamedWindow( "mywindow", CV_WINDOW_AUTOSIZE );
-   cvNamedWindow( "mask", CV_WINDOW_AUTOSIZE );
-   cvNamedWindow("Zbinaryzowane", CV_WINDOW_AUTOSIZE);
-   
-   float screenW = 1000;
-   float screenH = 800;
-   
-   	sf::RenderWindow renderWindow(sf::VideoMode(screenW, screenH), "Chessboard", sf::Style::Close|sf::Style::Resize);
-   
-    IplImage* currFrame = 0;
-    IplImage* prevFrame = 0;
-    IplImage* substract = 0;
-    IplImage* mask      = 0;
-    
-    int currMarker = 0;
-    
-    sf::CircleShape circles[4];
-    circles[0].setPosition(sf::Vector2f(200, 200) - sf::Vector2f(2.5f, 2.5f));
-    circles[1].setPosition(sf::Vector2f(screenW-200, 200) - sf::Vector2f(2.5f, 2.5f));
-    circles[2].setPosition(sf::Vector2f(screenW-200, screenH-200) - sf::Vector2f(2.5f, 2.5f));
-    circles[3].setPosition(sf::Vector2f(200, screenH-200) - sf::Vector2f(2.5f, 2.5f));
+    circles[0].setPosition(sf::Vector2f(-300, -300) - sf::Vector2f(2.5f, 2.5f));
+    circles[1].setPosition(sf::Vector2f(300, -300) - sf::Vector2f(2.5f, 2.5f));
+    circles[2].setPosition(sf::Vector2f(300, 300) - sf::Vector2f(2.5f, 2.5f));
+    circles[3].setPosition(sf::Vector2f(-300, 300) - sf::Vector2f(2.5f, 2.5f));
     for(int i=0; i<4; i++)
     {
         circles[i].setRadius(5.0f);
     }
     
-    sf::Vector2f points[4];
-    
-    sf::Event event;
-   while (renderWindow.isOpen())
-   {
-       while (renderWindow.pollEvent(event))
-       {
-            if (event.type == sf::Event::Closed)
-                renderWindow.close();
-            if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::R)
-            {
-                currMarker = 0;
-                acc.Clear();
-            }
-       }
-            
-     IplImage* frame = cvQueryFrame( capture );
-     if ( !frame )
-     {
-       fprintf( stderr, "ERROR: frame is null...\n" );
-       getchar();
-       break;
-     }
-     
+    Reset();
+}
+
+bool BoardDetection::Update(IplImage* frame, sf::RenderWindow& renderWindow)
+{
      IplImage* tmpFrame = prevFrame; 
      prevFrame = currFrame;
      currFrame = tmpFrame;
@@ -186,7 +149,7 @@ int main()
                  A = Inv(X)*Y;
                  
                  mask = cvCreateImage(cvGetSize(frame), 8, 1);
-                 cvSet(mask, cvScalar(0,0,0));
+                 cvSet(mask, cvScalar(255,255,255));
                  
                  CvPoint pts[1][4];
                 for(int i=0; i<4; i++)
@@ -196,23 +159,18 @@ int main()
                 }
                 CvPoint* ppt[1] = { pts[0] };
                 int npt[] = { 4 };
-                cvFillPoly(mask, ppt, npt,1, cvScalar( 255, 255, 255 ));
+                cvFillPoly(mask, ppt, npt,1, cvScalar( 0, 0, 0 ));
                 
-                cvShowImage("mask", mask);
+                cvShowImage("Board Mask", mask);
              }
          }
      }
      
-     if(currMarker == 4)
-     {
-         FindFingers(frame, mask);
-     }
+     //float mx = event.mouseMove.x;
+     //float my = event.mouseMove.y;
      
-     float mx = event.mouseMove.x;
-     float my = event.mouseMove.y;
-     
-     float x = A(1, 1)*mx + A(2, 1)*my + A(3, 1) + A(4, 1)*mx*my;
-     float y = A(1, 2)*mx + A(2, 2)*my + A(3, 2) + A(4, 2)*mx*my;
+     //float x = A(1, 1)*mx + A(2, 1)*my + A(3, 1) + A(4, 1)*mx*my;
+     //float y = A(1, 2)*mx + A(2, 2)*my + A(3, 2) + A(4, 2)*mx*my;
      
      if(currMarker < 4) 
          points[currMarker] = acc.GetHotPoint(frame->width, frame->height);
@@ -221,10 +179,9 @@ int main()
         cvCircle(frame, cvPoint(points[i].x, points[i].y), 5, cvScalar(255,0,0,255));
      }
      
-     cvCircle(frame, cvPoint(x, y), 3, cvScalar(0, 255, 255, 255));
+//     cvCircle(frame, cvPoint(x, y), 3, cvScalar(0, 255, 255, 255));
      
-     cvShowImage( "mywindow", frame );
-     if ( (cvWaitKey(10) & 255) == 27 ) break;
+     cvShowImage( "Board Detection", frame );
      
      static int show = 1;
 
@@ -232,27 +189,6 @@ int main()
      show %= 3;
      
      renderWindow.clear();
-     
-     /*sf::RectangleShape rect;
-     rect.setSize(sf::Vector2f(frame->width, frame->height));
-     rect.setFillColor(sf::Color(20,20,20,255));
-     renderWindow.draw(rect);
-     
-     sf::CircleShape c;
-     c.setFillColor(sf::Color(255,0,0,255));
-     c.setRadius(2.0f);
-     c.setPosition(x*screenW, y*screenH);
-     renderWindow.draw(c);
-     
-     if(currMarker == 4)
-     for(int i=0; i<4; i++)
-     {
-         sf::CircleShape cs;
-         cs.setRadius(3);
-         cs.setFillColor(sf::Color(255,255,0,255));
-         cs.setPosition(points[i] - sf::Vector2f(1.5f, 1.5f));
-        renderWindow.draw(cs);
-     }*/
      
      if(currMarker != 4)
      {
@@ -272,14 +208,24 @@ int main()
         }
      }
      
-     
-     renderWindow.display();
-     
-     sf::sleep(sf::seconds(0.1f));
-   }
-   
-   cvReleaseCapture( &capture );
-   cvDestroyWindow( "mywindow" );
-   return 0;
- }
-#endif
+    return currMarker == 4;
+}
+
+sf::Vector2f BoardDetection::CamToBoard(float mx, float my)
+{
+    float x = A(1, 1)*mx + A(2, 1)*my + A(3, 1) + A(4, 1)*mx*my;
+    float y = A(1, 2)*mx + A(2, 2)*my + A(3, 2) + A(4, 2)*mx*my;
+    return sf::Vector2f(x,y);
+}
+
+void BoardDetection::Reset()
+{
+    currMarker = 0;
+    acc.Clear();
+}
+
+IplImage* BoardDetection::GetMask()
+{
+    if(currMarker != 4) return 0;
+    return mask;
+}
