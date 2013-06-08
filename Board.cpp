@@ -9,8 +9,10 @@ using namespace std;
 Board::Board()
 {
 	createFigures();
-	szach = false;
-	mat = false;
+	whiteSzachowany = false;
+	blackSzachowany = false;
+	whiteMatowany = false;
+	blackMatowany = false;
 };
 
 Figure* Board::getFigure(int xx, int yy)
@@ -24,18 +26,26 @@ Figure* Board::getFigure(int xx, int yy)
 	return NULL;
 }
 
-void Board::moveTo (int xx, int yy, Figure* fig)
+bool Board::moveTo (int xx, int yy, Figure* fig)
 {
+	bool movePossible = false;
 	if(fieldExists(xx,yy))
 		if(fig!=NULL)
-			fig -> moveFigure(xx,yy);
-	szach = checkSzach(fig->getColor());
-	if (szach==true)
-		mat = checkMat(fig->getColor());
+			movePossible = fig -> moveFigure(xx,yy);
+	whiteSzachowany = checkSzach(0);
+	if(whiteSzachowany)
+		whiteMatowany = checkMat(0);
+
+	blackSzachowany = checkSzach(1);
+	if(blackSzachowany)
+		blackMatowany = checkMat(1);
+	return movePossible;
 }
 
-bool Board::isSzach(){return szach;}
-bool Board::isMat(){return mat;}
+bool Board::isWhiteSzachowany(){return whiteSzachowany;}
+bool Board::isBlackSzachowany(){return blackSzachowany;}
+bool Board::isWhiteMatowany(){return whiteMatowany;}
+bool Board::isBlackMatowany(){return blackMatowany;}
 std::vector<Figure*>* Board::getWhite(){return &white;}
 std::vector<Figure*>* Board::getBlack(){return &black;}
 
@@ -83,10 +93,10 @@ void Board::createFigures()
 	white.push_back(new Figure(5,4,6,1,this));
 	white.push_back(new Figure(5,5,6,1,this));
 	white.push_back(new Figure(5,6,6,1,this));
-	white.push_back(new Figure(5,7,6,1,this));
+	//white.push_back(new Figure(5,7,6,1,this));
 
 	black.push_back(new Figure(0,3,0,0,this));
-	black.push_back(new Figure(1,4,0,0,this));
+	black.push_back(new Figure(1,3,1,0,this)); //wsp 4,0
 	black.push_back(new Figure(2,0,0,0,this));
 	black.push_back(new Figure(2,7,0,0,this));
 	black.push_back(new Figure(3,2,0,0,this));
@@ -175,7 +185,6 @@ bool Board::checkMat(int color)
 {
 	int kolorSzachowanegoKrola = std::abs(color-1);
 	Figure* szachowanyKrol = findKing(kolorSzachowanegoKrola);
-	cout << "Wspolrzedne szachowanego krola " << szachowanyKrol->getX() << ":" << szachowanyKrol->getY() << "\n";
 
 	for (int i=szachowanyKrol->getY()-1;i<szachowanyKrol->getY()+2;i++)
 		for (int j=szachowanyKrol->getX()-1;j<szachowanyKrol->getX()+2;j++)
@@ -184,32 +193,137 @@ bool Board::checkMat(int color)
 				continue;
 			if(fieldExists(j,i))
 				if(!checkSzachOn(color,j,i))
-				{
-					cout << "Nie ma szacha na polu " << j << ":" << i << "\n";
 					if(szachowanyKrol->isMovePossible(j,i))
-					{
-						cout << "Ruch na pole " << j << ":" << i << " jest mozliwy\n";
 						return false;
-					}
-				}
 		}
-	return true;
+		vector<Figure*> figures = *(getSzachFigures(szachowanyKrol->getX(), szachowanyKrol->getY(), color));
+		if(figures.size()==1)
+		{
+			int szachX = figures[0]->getX();
+			int szachY = figures[0]->getY();
+			if(canFigureBeCaptured(szachX, szachY, kolorSzachowanegoKrola))
+				return false;
+			if(figures[0]->getType()!=4)
+			{
+				//nie kon, mozna probowac zaslaniania
+				if (canKingBeHidden(szachowanyKrol->getX(), szachowanyKrol->getY(), szachX, szachY, kolorSzachowanegoKrola))
+					return false;
+				else
+					return true;
+			}
+			else
+				return true;
+		}
+		if(figures.size()>1)
+		{
+			cout << "Mat\n";
+			return true;
+		}
 }
 
-std::vector<Figure*>* Board::getSzachFigures()
+std::vector<Figure*>* Board::getSzachFigures(int xx, int yy, int color)  //xx,yy-pozycja szachowanego krola  color-kolor szachujacych figur
 {
-
-	return NULL;
+	szachFigures.clear();
+	if (color==0)  //czarne
+	{
+		for (int i=0;i<black.size();i++)
+			if(black[i]->isMovePossible(xx,yy))
+				szachFigures.push_back(black[i]);
+	}
+	if(color==1)  //biale
+	{
+		for (int i=0;i<white.size();i++)
+			if(white[i]->isMovePossible(xx,yy))
+				szachFigures.push_back(white[i]);
+	}
+	return &szachFigures;
 }
 
-bool Board::canFighPreventFromMat()
+bool Board::canFigureBeCaptured(int xx, int yy, int color)  //xx,yy-pozycja szachujacej figury  color-kolor szachowanego krola
 {
-
+	if(color ==0)
+	{
+		for (int i=0;i<black.size();i++)
+			if(black[i]->isMovePossible(xx,yy))
+				return true;
+	}
+	if(color==1)
+	{
+		for (int i=0;i<white.size();i++)
+			if(white[i]->isMovePossible(xx,yy))
+				return true;
+	}
 	return false;
 }
 
-bool Board::canKingBeHidden()
+bool Board::canKingBeHidden(int xx1, int yy1, int xx2, int yy2, int color)
 {
+	int* tab;
+	std::vector <int*> figures;
+	
+	if (xx1==xx2 && yy1!=yy2)  //pionowo  yy rozne
+	{
+		int miny = yy1<yy2 ? yy1 : yy2;
+		int maxy = yy1<yy2 ? yy2 : yy1;
+		for (int i=miny;i<maxy;i++)
+		{
+			tab = new int[2];
+			tab[0] = xx1;
+			tab[1] = i;
+			figures.push_back(tab);
+		}
+	}
 
+	if (xx1!=xx2 && yy1==yy2)  //poziomo  xx rozne
+	{
+		int minx = xx1<xx2 ? xx1 : xx2;
+		int maxx = xx1<xx2 ? xx2 : xx1;
+		for (int i=minx;i<maxx;i++)
+		{
+			tab = new int[2];
+			tab[0] = i;
+			tab[1] = yy1;
+			figures.push_back(tab);
+		}
+	}
+
+	if(xx1!=xx2 && yy1!=yy2)  //skosnie
+	{
+		int minx = xx1<xx2 ? xx1 : xx2;
+		int maxx = xx1<xx2 ? xx2 : xx1;
+		int miny = yy1<yy2 ? yy1 : yy2;
+		int maxy = yy1<yy2 ? yy2 : yy1;
+		for (int i=0;i<maxx-minx;i++)
+		{
+			tab = new int[2];
+			tab[0] = minx+i;
+			tab[1] = miny+i;
+			figures.push_back(tab);
+		}
+	}
+
+	if(figures.size()>0)
+		figures.erase(figures.begin());
+
+	/*
+	for (int i=0;i<figures.size();i++)
+		cout << figures[i][0] << ":" << figures[i][1] << "\n";
+	*/
+
+	//tu sprawdzac, czy mozna jakas figura ruszyc na ktores z pol
+	if(color==0) //czarne
+	{
+		for (int i=0;i<black.size();i++)
+			for (int j=0;j<figures.size();j++)
+				if(black[i]->isMovePossible(figures[j][0], figures[j][1]))
+					return true;
+	}
+	if(color==1)//biale
+	{
+		for (int i=0;i<white.size();i++)
+			for (int j=0;j<figures.size();j++)
+				if(white[i]->isMovePossible(figures[j][0], figures[j][1]))
+					return true;
+	}
 	return false;
 }

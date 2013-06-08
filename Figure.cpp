@@ -17,13 +17,15 @@ Figure :: Figure(int _type, int _x, int _y, int c, Board* b)
 bool Figure :: moveFigure(int xx, int yy)
 {
 	bool moveOk = isMovePossible(xx, yy);
+	//cout << "Mozna ruszyc?: " << moveOk << "\n";
 	if (moveOk)
 	{
 		if(board->getFigure(xx,yy)!=NULL)
-			board->removeFigure(xx,yy);
+		board->removeFigure(xx,yy);
 		x = xx;
 		y = yy;
 	}
+	//cout << "Move ok?: " << moveOk << "  " << x << ":" << y << "\n";
 	return moveOk;
 }
 
@@ -39,6 +41,8 @@ bool Figure :: isMovePossible(int xx, int yy)
 		case 4: {moveOk = isKnightMovePossible(xx, yy);  break;}
 		case 5: {moveOk = isPawnMovePossible(xx, yy);  break;}
 	}
+	if(moveOk)
+		moveOk = temporaryMove(x,y,xx,yy);
 	return moveOk;
 }
 
@@ -212,4 +216,16 @@ bool Figure :: isFigureBeetweenPoints(int xx1, int yy1, int xx2, int yy2)
 			return true;
 	}
 	return false;
+}
+
+bool Figure :: temporaryMove(int befX, int befY, int aftX, int aftY)
+{
+	//cout << "Jest szach przed ruchem?: " << board->checkSzach(abs(color-1)) << "\n";
+	x = aftX;
+	y = aftY;
+	bool moveOk = !board->checkSzach(abs(color-1));
+	//cout << "Jest szach po ruchu?: " << board->checkSzach(abs(color-1)) << "\n";
+	x = befX;
+	y = befY;
+	return moveOk;
 }

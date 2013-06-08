@@ -1,20 +1,32 @@
-﻿Build started 2013-06-06 21:17:29.
+﻿Build started 2013-06-08 17:42:45.
      1>Project "D:\2 Studia\Interfejsy multimodalne\Projekt\Chessboard\Chessboard\Chessboard\Chessboard.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         D:\Microsoft Visual Studio 2012 Professional\VC\bin\CL.exe /c /I"D:\2 Studia\Interfejsy multimodalne\Projekt\Chessboard\Chessboard\Chessboard\SFML\include" /ID:\OpenCV2.1\include\opencv /I"D:\2 Studia\Interfejsy multimodalne\Projekt\Chessboard\Chessboard\Chessboard\SFML\include" /ZI /nologo /W3 /WX- /Od /Oy- /D SFML_STATIC /D _MBCS /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt Board.cpp
+         D:\Microsoft Visual Studio 2012 Professional\VC\bin\CL.exe /c /I"D:\2 Studia\Interfejsy multimodalne\Projekt\Chessboard\Chessboard\Chessboard\SFML\include" /ID:\OpenCV2.1\include\opencv /I"D:\2 Studia\Interfejsy multimodalne\Projekt\Chessboard\Chessboard\Chessboard\SFML\include" /ZI /nologo /W3 /WX- /Od /Oy- /D SFML_STATIC /D _MBCS /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt Board.cpp Figure.cpp
+         Figure.cpp
+     1>d:\2 studia\interfejsy multimodalne\projekt\chessboard\chessboard\chessboard\figure.cpp(213): warning C4018: '<' : signed/unsigned mismatch
          Board.cpp
-     1>d:\2 studia\interfejsy multimodalne\projekt\chessboard\chessboard\chessboard\board.cpp(18): warning C4018: '<' : signed/unsigned mismatch
-     1>d:\2 studia\interfejsy multimodalne\projekt\chessboard\chessboard\chessboard\board.cpp(21): warning C4018: '<' : signed/unsigned mismatch
-     1>d:\2 studia\interfejsy multimodalne\projekt\chessboard\chessboard\chessboard\board.cpp(44): warning C4018: '<' : signed/unsigned mismatch
-     1>d:\2 studia\interfejsy multimodalne\projekt\chessboard\chessboard\chessboard\board.cpp(47): warning C4018: '<' : signed/unsigned mismatch
-     1>d:\2 studia\interfejsy multimodalne\projekt\chessboard\chessboard\chessboard\board.cpp(55): warning C4018: '<' : signed/unsigned mismatch
-     1>d:\2 studia\interfejsy multimodalne\projekt\chessboard\chessboard\chessboard\board.cpp(58): warning C4018: '<' : signed/unsigned mismatch
-     1>d:\2 studia\interfejsy multimodalne\projekt\chessboard\chessboard\chessboard\board.cpp(116): warning C4018: '<' : signed/unsigned mismatch
-     1>d:\2 studia\interfejsy multimodalne\projekt\chessboard\chessboard\chessboard\board.cpp(124): warning C4018: '<' : signed/unsigned mismatch
-     1>d:\2 studia\interfejsy multimodalne\projekt\chessboard\chessboard\chessboard\board.cpp(149): warning C4018: '<' : signed/unsigned mismatch
-     1>d:\2 studia\interfejsy multimodalne\projekt\chessboard\chessboard\chessboard\board.cpp(153): warning C4018: '<' : signed/unsigned mismatch
-     1>d:\2 studia\interfejsy multimodalne\projekt\chessboard\chessboard\chessboard\board.cpp(162): warning C4018: '<' : signed/unsigned mismatch
-     1>d:\2 studia\interfejsy multimodalne\projekt\chessboard\chessboard\chessboard\board.cpp(166): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\2 studia\interfejsy multimodalne\projekt\chessboard\chessboard\chessboard\board.cpp(20): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\2 studia\interfejsy multimodalne\projekt\chessboard\chessboard\chessboard\board.cpp(23): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\2 studia\interfejsy multimodalne\projekt\chessboard\chessboard\chessboard\board.cpp(54): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\2 studia\interfejsy multimodalne\projekt\chessboard\chessboard\chessboard\board.cpp(57): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\2 studia\interfejsy multimodalne\projekt\chessboard\chessboard\chessboard\board.cpp(65): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\2 studia\interfejsy multimodalne\projekt\chessboard\chessboard\chessboard\board.cpp(68): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\2 studia\interfejsy multimodalne\projekt\chessboard\chessboard\chessboard\board.cpp(126): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\2 studia\interfejsy multimodalne\projekt\chessboard\chessboard\chessboard\board.cpp(134): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\2 studia\interfejsy multimodalne\projekt\chessboard\chessboard\chessboard\board.cpp(159): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\2 studia\interfejsy multimodalne\projekt\chessboard\chessboard\chessboard\board.cpp(163): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\2 studia\interfejsy multimodalne\projekt\chessboard\chessboard\chessboard\board.cpp(172): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\2 studia\interfejsy multimodalne\projekt\chessboard\chessboard\chessboard\board.cpp(176): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\2 studia\interfejsy multimodalne\projekt\chessboard\chessboard\chessboard\board.cpp(229): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\2 studia\interfejsy multimodalne\projekt\chessboard\chessboard\chessboard\board.cpp(235): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\2 studia\interfejsy multimodalne\projekt\chessboard\chessboard\chessboard\board.cpp(246): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\2 studia\interfejsy multimodalne\projekt\chessboard\chessboard\chessboard\board.cpp(252): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\2 studia\interfejsy multimodalne\projekt\chessboard\chessboard\chessboard\board.cpp(316): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\2 studia\interfejsy multimodalne\projekt\chessboard\chessboard\chessboard\board.cpp(317): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\2 studia\interfejsy multimodalne\projekt\chessboard\chessboard\chessboard\board.cpp(323): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\2 studia\interfejsy multimodalne\projekt\chessboard\chessboard\chessboard\board.cpp(324): warning C4018: '<' : signed/unsigned mismatch
+         Generating Code...
+     1>d:\2 studia\interfejsy multimodalne\projekt\chessboard\chessboard\chessboard\board.cpp(222): warning C4715: 'Board::checkMat' : not all control paths return a value
        Link:
          D:\Microsoft Visual Studio 2012 Professional\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\2 Studia\Interfejsy multimodalne\Projekt\Chessboard\Chessboard\Debug\Chessboard.exe" /INCREMENTAL /NOLOGO /LIBPATH:D:\OpenCV2.1\lib /LIBPATH:"D:\2 Studia\Interfejsy multimodalne\Projekt\Chessboard\Chessboard\Chessboard\SFML\lib" "sfml-graphics-s-d.lib" "sfml-window-s-d.lib" "sfml-system-s-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib cv210.lib cxcore210.lib highgui210.lib cvaux210.lib ml210.lib "sfml-graphics-s-d.lib" "sfml-window-s-d.lib" "sfml-system-s-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\2 Studia\Interfejsy multimodalne\Projekt\Chessboard\Chessboard\Debug\Chessboard.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\2 Studia\Interfejsy multimodalne\Projekt\Chessboard\Chessboard\Debug\Chessboard.lib" /MACHINE:X86 Debug\Board.obj
          Debug\Figure.obj
@@ -28,4 +40,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:02.16
+Time Elapsed 00:00:03.56

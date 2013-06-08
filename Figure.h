@@ -34,6 +34,7 @@ private:
 	bool isColorOfTheFigureTheSame(int xx, int yy);  //done
 	bool isFigureWithOppositeColor(int xx, int yy, int color);  //done    //color - podac kolor, do ktorego ma byc przeciwny
 	bool isFigureBeetweenPoints(int xx1, int yy1, int xx2, int yy2);  //done  //tam pewnie trzeba usuwac pamiec na koniec...
+	bool temporaryMove(int befX, int befY, int aftX, int aftY);
 };
  
 #endif

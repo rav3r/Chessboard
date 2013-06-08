@@ -15,21 +15,31 @@ int main(int argc, char *argv[])
 	
 	Board* b = new Board();
 
-	//Figure* fig = b->getFigure(3,7);  //bialy krol
-	//Figure* fig = b->getFigure(4,7);  //biala krolowa
-	//Figure* fig = b->getFigure(5,7);  //bialy prawy laufer
-	//Figure* fig = b->getFigure(6,7);  //bialy prawy kon
-	//Figure* fig = b->getFigure(7,7);  //biala prawa wieza
-	//Figure* fig = b->getFigure(7,6);  //bialy pionek max od prawej	
+	b->printFigures();
+
+	/*
+	//test zbijania biala prawa wieza czarnego pionka i szachowania biala wieza posrodku planszy czarnego krola na pierwotnym miejscu
+	Figure* fig = b->getFigure(7,7);
+	std :: cout << "Ruch mozliwy?:" << b-> moveTo(7,1,fig) << "\n";
+	std :: cout << "Is white szachowany?: " << b->isWhiteSzachowany() << "\n";
+	std :: cout << "Is black szachowany?: " << b->isBlackSzachowany() << "\n";
+	std :: cout << "Is white matowany?: " << b->isWhiteMatowany() << "\n";
+	std :: cout << "Is black matowany?: " << b->isBlackMatowany() << "\n";
+	*/
+
 	
+	//Test dopuszczenia do ruchu laufra - po tym ruchu bedzie szach
+	Figure* fig = b->getFigure(3,1);
+	std :: cout << "Przed ruchem: " << fig->getX() << ":" << fig->getY() << "\n";
+	std :: cout << "Ruch mozliwy?:" << b-> moveTo(4,2,fig) << "\n";
+	std :: cout << "Po ruchu: " << fig->getX() << ":" << fig->getY() << "\n";
+	std :: cout << "Is white szachowany?: " << b->isWhiteSzachowany() << "\n";
+	std :: cout << "Is black szachowany?: " << b->isBlackSzachowany() << "\n";
+	std :: cout << "Is white matowany?: " << b->isWhiteMatowany() << "\n";
+	std :: cout << "Is black matowany?: " << b->isBlackMatowany() << "\n";
+	
+
 	b->printFigures();
-	b-> moveTo(7,1,b->getFigure(7,7));
-	b->printFigures();
-	std :: cout << "Is szach?: " << b->isSzach() << "\n";
-	std :: cout << "Is mat?: " << b->isMat() << "\n";
-
-
-
 
 
 
