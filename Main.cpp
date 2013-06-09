@@ -117,6 +117,10 @@ int main()
     
     sf::Vector2f fingerPos(0,0);
     bool showFinger = false;
+    
+    sf::Clock clickClock;
+    
+    int lastHotRow=-1, lastHotCol=-1;
 
 	// Glowna petla programu
 	while(renderWindow.isOpen())
@@ -166,6 +170,7 @@ int main()
             sf::Vector2f f1 = fingerDetection.GetPos1();
             sf::Vector2f f2 = fingerDetection.GetPos2();
             
+            bool lastShowFinger = showFinger;
             if(f1.x == 0 && f1.y==0)
                 showFinger = false;
             else
@@ -178,10 +183,41 @@ int main()
             f2 *= 600.0f; f2 -= sf::Vector2f(300, 300);
             
             if(showFinger)
-            fingerPos = fingerPos*0.9f + f1*0.1f;
+                fingerPos = fingerPos*0.9f + f1*0.1f;
+            if(lastShowFinger == false)
+                fingerPos = f1;
             c.setPosition(fingerPos);
             if(showFinger)
                 renderWindow.draw(c);
+            
+            if(showFinger)
+            {
+                if(clickClock.getElapsedTime().asSeconds() >= 2.0f)
+                {
+                    clickClock.restart();
+                    // click!
+                    std::cout << "click: "<<lastHotRow << "-" << lastHotCol<<"\n";
+                } else
+                {
+                    sf::Vector2f fingerBoardSpace = fingerPos + sf::Vector2f(300, 300);
+                    if(fingerBoardSpace.x < 0 || fingerBoardSpace.y < 0 ||
+                            fingerBoardSpace.x > 600 || fingerBoardSpace.y >600)
+                        clickClock.restart();
+                    else
+                    {
+                        int currCol = int(fingerBoardSpace.x / 75.0f);
+                        int currRow = int(fingerBoardSpace.y / 75.0f);
+                        
+                        if(currCol != lastHotCol || currRow != lastHotRow)
+                        {
+                            lastHotCol = currCol;
+                            lastHotRow = currRow;
+                            clickClock.restart();
+                        }
+                    }
+                }
+            } else
+                clickClock.restart();
             
             //c.setPosition(f2);
             //renderWindow.draw(c);

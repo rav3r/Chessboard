@@ -58,7 +58,7 @@ IplImage* Binaryzacja(IplImage* obraz_HSV){
     //// H(60,100), S(50,255), V(50,255)
     float minH = 0; float maxH = 360;
     
-    cvInRangeS(obraz_HSV, cvScalar(minH/2.0f, 0, 0), cvScalar(maxH/2.0f,255,80), obraz_bin);  //**********
+    cvInRangeS(obraz_HSV, cvScalar(minH/2.0f, 0, 0), cvScalar(maxH/2.0f,255,30), obraz_bin);  //**********
 	//IplImage* obraz_er=cvCreateImage(cvGetSize(obraz_HSV),IPL_DEPTH_8U, 1);
 	//cvErode(obraz_bin, obraz_er, 0, 2);
 	//IplImage* obraz_dyl=cvCreateImage(cvGetSize(obraz_HSV),IPL_DEPTH_8U, 1);
