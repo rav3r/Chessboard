@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
 	
 	Board* b = new Board();
 
-	b->printFigures();
+	//b->printFigures();
 
 	/*
 	//test zbijania biala prawa wieza czarnego pionka i szachowania biala wieza posrodku planszy czarnego krola na pierwotnym miejscu
@@ -27,7 +27,7 @@ int main(int argc, char *argv[])
 	std :: cout << "Is black matowany?: " << b->isBlackMatowany() << "\n";
 	*/
 
-	
+	/*
 	//Test dopuszczenia do ruchu laufra - po tym ruchu bedzie szach
 	Figure* fig = b->getFigure(3,1);
 	std :: cout << "Przed ruchem: " << fig->getX() << ":" << fig->getY() << "\n";
@@ -37,9 +37,15 @@ int main(int argc, char *argv[])
 	std :: cout << "Is black szachowany?: " << b->isBlackSzachowany() << "\n";
 	std :: cout << "Is white matowany?: " << b->isWhiteMatowany() << "\n";
 	std :: cout << "Is black matowany?: " << b->isBlackMatowany() << "\n";
-	
+	*/
 
-	b->printFigures();
+	//b->printFigures();
+
+	//b->printFigures();
+	Figure* f = b->getFigure(3,4);
+	std::cout << "Ruch wiezy" << b->moveTo(3,1,f) << "\n";
+	 f = b->getFigure(3,0);
+	std::cout << "Ruch krola" << b->moveTo(3,1,f) << "\n";
 
 
 

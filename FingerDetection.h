@@ -1,8 +1,8 @@
 #ifndef FINGER_DET_H
 #define	FINGER_DET_H
 
-#include <opencv/cv.h>
-#include <opencv/highgui.h>
+#include <cv.h>
+#include <highgui.h>
 
 #define SFML_STATIC
 #include <SFML/Graphics.hpp>

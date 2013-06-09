@@ -93,13 +93,15 @@ Matrix A(4,4);
 
 void BoardDetection::Init()
 {
-    circles[0].setPosition(sf::Vector2f(-300, -300) - sf::Vector2f(2.5f, 2.5f));
-    circles[1].setPosition(sf::Vector2f(300, -300) - sf::Vector2f(2.5f, 2.5f));
-    circles[2].setPosition(sf::Vector2f(300, 300) - sf::Vector2f(2.5f, 2.5f));
-    circles[3].setPosition(sf::Vector2f(-300, 300) - sf::Vector2f(2.5f, 2.5f));
+	float r=20;
+	sf::Vector2f diff(r/2.0f, r/2.0f);
+    circles[0].setPosition(sf::Vector2f(-300, -300) - diff);
+    circles[1].setPosition(sf::Vector2f(300, -300) - diff);
+    circles[2].setPosition(sf::Vector2f(300, 300) - diff);
+    circles[3].setPosition(sf::Vector2f(-300, 300) - diff);
     for(int i=0; i<4; i++)
     {
-        circles[i].setRadius(5.0f);
+        circles[i].setRadius(r);
     }
     
     Reset();

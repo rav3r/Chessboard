@@ -58,15 +58,13 @@ void Figure::print()
 
 
 
-
-
-
 bool Figure :: isKingMovePossible(int xx, int yy)
 {//krol
 	if(isColorOfTheFigureTheSame(xx,yy))
 			return false;
 	if(abs(x-xx)>1 || abs(y-yy)>1)
 		return false;
+	cout << "Ruch krola " << color <<  " mozliwy\n";
 	return true;
 }
 
@@ -221,10 +219,27 @@ bool Figure :: isFigureBeetweenPoints(int xx1, int yy1, int xx2, int yy2)
 bool Figure :: temporaryMove(int befX, int befY, int aftX, int aftY)
 {
 	//cout << "Jest szach przed ruchem?: " << board->checkSzach(abs(color-1)) << "\n";
+	Figure* fig = board->getFigure(aftX, aftY);
+	
+	Figure* newFig = NULL;
+	bool usunieto = false;
+	if(fig!=NULL)
+	{
+		newFig = new Figure(fig->getType(),fig->getX(),fig->getY(),fig->getColor(), board);
+		board->removeFigure(fig->getX(), fig->getY());
+		usunieto = true;
+	}
 	x = aftX;
 	y = aftY;
 	bool moveOk = !board->checkSzach(abs(color-1));
 	//cout << "Jest szach po ruchu?: " << board->checkSzach(abs(color-1)) << "\n";
+	if(usunieto)
+	{
+		if(newFig-> getColor()==0)
+			board->getBlack()->push_back(newFig);
+		if(newFig-> getColor()==1)
+			board->getWhite()->push_back(newFig);
+	}
 	x = befX;
 	y = befY;
 	return moveOk;

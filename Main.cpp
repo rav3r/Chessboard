@@ -76,7 +76,7 @@ void DrawBoard(Board &board, sf::RenderWindow &renderWindow,
 int main()
 {	
     // OpenCV
-    CvCapture* capture = cvCaptureFromCAM( CV_CAP_ANY );
+    CvCapture* capture = cvCaptureFromCAM(CV_CAP_ANY);
     if ( !capture )
     {
         fprintf( stderr, "ERROR: capture is NULL \n" );
@@ -121,6 +121,8 @@ int main()
     sf::Clock clickClock;
     
     int lastHotRow=-1, lastHotCol=-1;
+	int selectedRow=-1, selectedCol=-1;
+	int currColor = 1;
 
 	// Glowna petla programu
 	while(renderWindow.isOpen())
@@ -135,6 +137,12 @@ int main()
                 state = DETECT_BOARD;
                 boardDetection.Reset();
             }
+
+			//tu zmienialem
+			//if(event.type = sf::Event)
+			{
+
+			}
 		}
 
         IplImage* frame = cvQueryFrame( capture );
@@ -197,6 +205,42 @@ int main()
                     clickClock.restart();
                     // click!
                     std::cout << "click: "<<lastHotRow << "-" << lastHotCol<<"\n";
+					std::cout << "\n\ncolor: "<<currColor<<"\n\n";
+					std::cout << "\n\n"<<selectedRow <<"-"<<selectedCol <<"->"<<lastHotRow<<"-"<<lastHotCol<<"\n\n";
+					
+					if(selectedRow == -1)
+					{
+						
+						Figure* f = board.getFigure(lastHotCol, lastHotRow);
+						if(f && f->getColor() == currColor)
+						{
+							selectedRow = lastHotRow; selectedCol = lastHotCol;
+						}
+					} else
+					{
+						Figure* f = board.getFigure(lastHotCol, lastHotRow);
+						if(f && f->getColor() == currColor)
+						{
+							selectedRow = lastHotRow; selectedCol = lastHotCol;
+							//std::cout << "\ndddd\n"<<selectedRow <<"-"<<selectedCol <<"->"<<lastHotRow<<"-"<<lastHotCol<<"\n\n";
+							//std::cout << "\n\ncolor: "<<currColor<<"\n\n";
+						} else
+						{
+							Figure* sel = board.getFigure(selectedCol, selectedRow);
+							//std::cout << "\n\n"<<selectedRow <<"-"<<selectedCol <<"->"<<lastHotRow<<"-"<<lastHotCol<<"\n\n";
+
+							if(board.moveTo(lastHotCol, lastHotRow, sel))
+							{
+								std::cout << "UDALO SIE\n";
+								std::cout << board.isBlackSzachowany()<<"-black\n";
+								std::cout << board.isWhiteSzachowany()<<"-white\n";
+								std::cout<< board.checkSzachOn(1,3,0)<<"cokolwiek\n";
+								currColor ^= 1;
+							
+							}
+							selectedRow = -1;
+						}
+					}
                 } else
                 {
                     sf::Vector2f fingerBoardSpace = fingerPos + sf::Vector2f(300, 300);

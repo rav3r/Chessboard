@@ -28,6 +28,8 @@ Figure* Board::getFigure(int xx, int yy)
 
 bool Board::moveTo (int xx, int yy, Figure* fig)
 {
+	whiteSzachowany = false;
+	blackSzachowany = false;
 	bool movePossible = false;
 	if(fieldExists(xx,yy))
 		if(fig!=NULL)
@@ -150,6 +152,7 @@ bool Board::checkSzach(int color)
 	int kolorSzachowanegoKrola = std::abs(color-1);
 	Figure* szachowanyKrol = findKing(kolorSzachowanegoKrola);
 	bool czySzach = checkSzachOn(color, szachowanyKrol->getX(), szachowanyKrol->getY());
+	//cout << "Jest szach krola\n";
 	return czySzach;
 }
 

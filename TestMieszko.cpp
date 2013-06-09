@@ -13,8 +13,13 @@
 //Przy odległości ok. 20-30 cm od kamerki macie pole do popisu około 20x20 cm, bądź troszkę większe
 
 #include <iostream>
+#ifdef _WIN32
+#include <cv.h>
+#include <highgui.h>
+#else
 #include <opencv/cv.h>
 #include <opencv/highgui.h>
+#endif
 #include <fstream>
 
 using namespace std;
@@ -30,7 +35,7 @@ int palec2y = 0;
 
 const int imheight=480;
 const int imwidth=640;
-const int helpsize=2000;									//możliwe że trzeba będzie jeszcze to powiększyć! INACZEJ MOŻE SIĘ SYYYYYYYYYYYYYYYYYYYYYYYYYYPAĆ!!!!
+const int helpsize=imwidth*imheight;									//możliwe że trzeba będzie jeszcze to powiększyć! INACZEJ MOŻE SIĘ SYYYYYYYYYYYYYYYYYYYYYYYYYYPAĆ!!!!
 
 int tab_ind[imheight][imwidth];
 
@@ -58,7 +63,7 @@ IplImage* Binaryzacja(IplImage* obraz_HSV){
     //// H(60,100), S(50,255), V(50,255)
     float minH = 0; float maxH = 360;
     
-    cvInRangeS(obraz_HSV, cvScalar(minH/2.0f, 0, 0), cvScalar(maxH/2.0f,255,30), obraz_bin);  //**********
+    cvInRangeS(obraz_HSV, cvScalar(minH/2.0f, 0, 0), cvScalar(maxH/2.0f,255,50), obraz_bin);  //**********
 	//IplImage* obraz_er=cvCreateImage(cvGetSize(obraz_HSV),IPL_DEPTH_8U, 1);
 	//cvErode(obraz_bin, obraz_er, 0, 2);
 	//IplImage* obraz_dyl=cvCreateImage(cvGetSize(obraz_HSV),IPL_DEPTH_8U, 1);
@@ -284,11 +289,11 @@ void indeksacja(IplImage* obraz_bin){
 void FindFingers(IplImage* frame)
 {
     frame=cvCloneImage(frame); 
-    cvSmooth(frame, frame, CV_GAUSSIAN,3,3);
+    //cvSmooth(frame, frame, CV_GAUSSIAN,3,3);
     IplImage* obraz_HSV = cvCreateImage(cvGetSize(frame), IPL_DEPTH_8U, 3);
     cvCvtColor(frame, obraz_HSV, CV_BGR2HSV);				
     IplImage* obraz_bin = Binaryzacja(obraz_HSV);  
-	cvSmooth(obraz_bin, obraz_bin, CV_GAUSSIAN,3,3); //?
+	//cvSmooth(obraz_bin, obraz_bin, CV_GAUSSIAN,3,3); //?
 	indeksacja(obraz_bin);  //znajdz palce
     
     cvShowImage("Binarized", obraz_bin);

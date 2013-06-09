@@ -1,7 +1,7 @@
 #include "Config.h"
 #ifdef COMPILE_TEST_RAFAL
-#include "opencv/cv.h" 
- #include "opencv/highgui.h" 
+#include "cv.h" 
+ #include "highgui.h" 
  #include <iostream>
 #define SFML_STATIC
 #include <SFML/Graphics.hpp>

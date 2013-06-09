@@ -1,8 +1,8 @@
 #ifndef BOARDDETECTION_H
 #define	BOARDDETECTION_H
 
-#include "opencv/cv.h" 
-#include "opencv/highgui.h"
+#include "cv.h" 
+#include "highgui.h"
 
 #define SFML_STATIC
 #include <SFML/Graphics.hpp>
