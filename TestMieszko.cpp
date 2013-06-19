@@ -293,10 +293,10 @@ void FindFingers(IplImage* frame)
     IplImage* obraz_HSV = cvCreateImage(cvGetSize(frame), IPL_DEPTH_8U, 3);
     cvCvtColor(frame, obraz_HSV, CV_BGR2HSV);				
     IplImage* obraz_bin = Binaryzacja(obraz_HSV);  
-	//cvSmooth(obraz_bin, obraz_bin, CV_GAUSSIAN,3,3); //?
+	cvSmooth(obraz_bin, obraz_bin, CV_GAUSSIAN,3,3); //?
 	indeksacja(obraz_bin);  //znajdz palce
     
-    cvShowImage("Binarized", obraz_bin);
+    //cvShowImage("Binarized", obraz_bin);
     
     cvReleaseImage(&obraz_HSV);
 	cvReleaseImage(&obraz_bin);

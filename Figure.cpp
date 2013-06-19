@@ -41,8 +41,8 @@ bool Figure :: isMovePossible(int xx, int yy)
 		case 4: {moveOk = isKnightMovePossible(xx, yy);  break;}
 		case 5: {moveOk = isPawnMovePossible(xx, yy);  break;}
 	}
-	if(moveOk)
-		moveOk = temporaryMove(x,y,xx,yy);
+	//if(moveOk)
+		//moveOk = temporaryMove(x,y,xx,yy);
 	return moveOk;
 }
 

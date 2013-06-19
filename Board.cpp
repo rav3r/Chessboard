@@ -81,7 +81,7 @@ void Board::createFigures()
 {
 	white.push_back(new Figure(0,3,7,1,this));
 	white.push_back(new Figure(1,4,7,1,this));
-	white.push_back(new Figure(2,3,4,1,this));  //wsp 0,7 - ta wieza szachuje
+	white.push_back(new Figure(2,0,7,1,this));  //wsp 0,7 - ta wieza szachuje
 	white.push_back(new Figure(2,7,7,1,this));
 	white.push_back(new Figure(3,2,7,1,this));
 	white.push_back(new Figure(3,5,7,1,this));
@@ -95,10 +95,10 @@ void Board::createFigures()
 	white.push_back(new Figure(5,4,6,1,this));
 	white.push_back(new Figure(5,5,6,1,this));
 	white.push_back(new Figure(5,6,6,1,this));
-	//white.push_back(new Figure(5,7,6,1,this));
+	white.push_back(new Figure(5,7,6,1,this));
 
 	black.push_back(new Figure(0,3,0,0,this));
-	black.push_back(new Figure(1,3,1,0,this)); //wsp 4,0
+	black.push_back(new Figure(1,4,0,0,this)); //wsp 4,0
 	black.push_back(new Figure(2,0,0,0,this));
 	black.push_back(new Figure(2,7,0,0,this));
 	black.push_back(new Figure(3,2,0,0,this));
@@ -109,7 +109,7 @@ void Board::createFigures()
 	black.push_back(new Figure(5,0,1,0,this));
 	black.push_back(new Figure(5,1,1,0,this));
 	black.push_back(new Figure(5,2,1,0,this));
-	//black.push_back(new Figure(5,3,1,0,this));
+	black.push_back(new Figure(5,3,1,0,this));
 	black.push_back(new Figure(5,4,1,0,this));
 	black.push_back(new Figure(5,5,1,0,this));
 	black.push_back(new Figure(5,6,1,0,this));

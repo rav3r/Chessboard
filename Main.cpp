@@ -92,6 +92,10 @@ int main()
 	boardTexture.loadFromFile("data/board.png");
 	sf::Sprite boardSprite(boardTexture);
 
+	sf::Texture selTexture;
+	selTexture.loadFromFile("data/selection.png");
+	sf::Sprite selSprite(selTexture);
+
 	sf::Texture figuresTexture;
 	figuresTexture.loadFromFile("data/figures.png");
 	sf::Sprite figuresSprites[6*2];
@@ -171,6 +175,14 @@ int main()
         {
             fingerDetection.Update(frame);
             DrawBoard(board, renderWindow, boardSprite, figuresSprites);
+
+			sf::Vector2f hBoard(300,300);
+
+			if(selectedRow != -1 && selectedCol != -1)
+			{
+					selSprite.setPosition(selectedCol*75-hBoard.x, selectedRow*75-hBoard.y);
+				renderWindow.draw(selSprite);
+			}
             
             sf::CircleShape c;
             c.setRadius(5.0f);
